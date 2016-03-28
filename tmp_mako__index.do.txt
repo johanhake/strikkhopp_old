@@ -3,49 +3,26 @@ AUTHOR: Hake
 DATE: 29.03.2016
 
 
-===== Fysikk =====
+Vi ser på et enkelt skjema for å modellere et strikkhopp.
 
-We consider a vibrating mechanical system as shown in Figure ref{ipynbex:physics:fig}.
+===== Modellen =====
 
-FIGURE: [fig/oscillator_general, width=600 frac=0.8] Oscillating system with spring and damper. label{ipynbex:physics:fig}
-
-===== Mathematics =====
-label{ipynbex:math}
-
-A differential equation for the system in Figure ref{ipynbex:physics:fig} reads
-
+Vi starter med Newtons 2e lov:
 !bt
-\[ mu'' + f(u') + s(u) = F(t),\quad u(0)=I,\ u'(0)=V\thinspace .\]
+\begin{align}
+\sum F &= m\cdot a = m\cdot v^{'}\\ 
+v^{'} &= \frac{\sum F}{m}
+\end{align}
 !et
-In the linear damping case, where $f(u')=bu'$ for some constant
-$b\geq 0$, we can solve the problem numerically by a scheme
 
-!bt
-\begin{equation}
-u^{n+1} = \left(2mu^n + (\frac{b}{2}\Delta t - m)u^{n-1} +
-\Delta t^2(F^n - s(u^n))
-\right)(m + \frac{b}{2}\Delta t)^{-1},
-label{ipynbex:u:scheme:lin}
-\end{equation}
-!et
-for $n=0,1,\ldots$. A special formula is required for $n=0$:
-
-!bt
-\begin{equation}
-u^1 = u^0 + \Delta t\, V
-+ \frac{\Delta t^2}{2m}(-bV - s(u^0) + F^0)
-\thinspace .
-label{ipynbex:u:scheme0:lin}
-\end{equation}
-!et
+Summen av kreftene $\sum F$ er i dette tilfellet lik gravitasjonen, $G=m\cdot g$ + strikkraften, $S=-k\cdot v$ og luftmotstandet $L=-D\cdot v$
 
 ===== Implementation =====
 
 # Note: Plain Markdown cannot refer to equations with numbers.
 # This is a DocOnce extension.
 
-The formulas (ref{ipynbex:u:scheme:lin}) and (ref{ipynbex:u:scheme0:lin})
-can be implemented as follows in a Python function:
+# can be implemented as follows in a Python function:
 
 # Next code (hidden code):
 # Not strictly needed since zeros inside the next function
