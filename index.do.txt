@@ -6,7 +6,14 @@ DATE: 29.03.2016
 Vi ser på et enkelt skjema for å modellere et strikkhopp.
 
 ===== Modellen =====
-Her bruker vi bevegelseslikningene for å modellere et strikkhopp, men i steden for å bruke konstant akselerasjon oppdateres den for hvert tidssteg.
+Her bruker vi bevegelseslikningene for å modellere et strikkhopp, men i steden for å bruke konstant akselerasjon oppdateres den for hvert tidssteg. Vårt skjema skiller seg da fra differensiallikningen vi hadde fra presentasjonen.
+
+!bt
+\begin{align}
+v_{i+1} &= v_i + a_i\cdot \Delta t\\
+x_{i+1} &= x_i + v_i\cdot \Delta t + \frac{a_i\cdot \Delta t^2}{2}
+\end{align}
+!et
 
 Akselerasjonen finner vi fra Newtons 2e lov:
 !bt
@@ -74,7 +81,7 @@ x[0] = x0
 # Funksjon som regner ut strikkraften
 def S(x):
     # Ikke noen kraft hvis strikken er slak!
-    if x0 - x > xL:
+    if x0 - x < xL:
         return 0
     else:
         return -k*x
